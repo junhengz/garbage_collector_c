@@ -215,10 +215,19 @@ struct Node *avl_delete(struct Node *root, void *address)
  */
 struct Node *avl_search(struct Node *root, void *address)
 {
-    if (!root || root->address == address)
-        return root;
-    struct Node *left = avl_search(root->left, address);
-    return left ? left : avl_search(root->right, address);
+   struct Node *floor_node = NULL;
+
+    while (root) {
+        if (root->address == address) {
+            return root;
+        } else if (root->address < address) {
+            floor_node = root; // Potential floor address
+            root = root->right;
+        } else {
+            root = root->left;
+        }
+    }
+    return floor_node;
 }
 
 
