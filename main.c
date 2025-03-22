@@ -35,21 +35,22 @@ int test_run()
 int main()
 {
     struct Node *root = NULL;
+    size_t size = 10*sizeof(char); 
 
     // Insert nodes
-    char *string1 = (char*) malloc(10*sizeof(char));
-    char *string2 = (char*) malloc(10*sizeof(char));
-    char *string3 = (char*) malloc(10*sizeof(char));
-    char *string4 = (char*) malloc(10*sizeof(char));
-    char *string5 = (char*) malloc(10*sizeof(char));
-    char *string6 = (char*) malloc(10*sizeof(char));
+    char *string1 = (char*) malloc(size);
+    char *string2 = (char*) malloc(size);
+    char *string3 = (char*) malloc(size);
+    char *string4 = (char*) malloc(size);
+    char *string5 = (char*) malloc(size);
+    char *string6 = (char*) malloc(size);
 
-    root = avl_insert(root, string1);
-    root = avl_insert(root, string2);
-    root = avl_insert(root, string3);
-    root = avl_insert(root, string4);
-    root = avl_insert(root, string5);
-    root = avl_insert(root, string6);
+    root = avl_insert(root, string1, size);
+    root = avl_insert(root, string2, size);
+    root = avl_insert(root, string3, size);
+    root = avl_insert(root, string4, size);
+    root = avl_insert(root, string5, size);
+    root = avl_insert(root, string6, size);
 
     printf("Visualized AVL tree:\n");
     printTree(root, 0);

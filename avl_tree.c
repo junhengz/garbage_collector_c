@@ -11,7 +11,7 @@ void in_order(struct Node *root)
     if (!root)
         return;
     in_order(root->left);
-    printf("%p ", root->address);
+    printf("Address:%p Size:%lu Marked %u ", root->address, root->size, root->marked);
     in_order(root->right);
 }
 
@@ -28,7 +28,7 @@ void printTree(struct Node *root, int space) {
     printf("\n");
     for (int i = COUNT; i < space; i++)
         printf(" ");
-    printf("%p\n", root->address);
+    printf("Address:%p Size:%lu Marked %u ", root->address, root->size, root->marked);
     printTree(root->left, space);
 }
 
@@ -88,15 +88,15 @@ static struct Node *left_rotate(struct Node *root)
  * LR: left rotate the left child and then right rotate the tree
  * RL: right rotate the right child and then left rotate the tree
  */
-struct Node *avl_insert(struct Node *root, void *address)
+struct Node *avl_insert(struct Node *root, void *address, size_t size)
 {
     if (root == NULL)
-        return newNode(address);
+        return newNode(address, size);
 
     if (address < root->address)
-        root->left = avl_insert(root->left, address);
+        root->left = avl_insert(root->left, address, size);
     else if (address > root->address)
-        root->right = avl_insert(root->right, address);
+        root->right = avl_insert(root->right, address, size);
     else
         return root;
 
@@ -231,3 +231,12 @@ struct Node *avl_search(struct Node *root, void *address)
 }
 
 
+void 
+avl_apply(struct Node *root, void(* fn)(struct Node *)) {
+    if (!root) {
+        return;
+    }
+    fn(root);
+    avl_apply(root->left, fn);
+    avl_apply(root->right, fn);
+}
