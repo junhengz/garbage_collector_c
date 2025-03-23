@@ -1,3 +1,6 @@
+#ifndef NODE_H
+#define NODE_H
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -11,3 +14,4 @@ struct Node {
 
 struct Node* newNode(void *address, size_t size);
 
+#endif

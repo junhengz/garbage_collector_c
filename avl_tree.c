@@ -11,7 +11,7 @@ void in_order(struct Node *root)
     if (!root)
         return;
     in_order(root->left);
-    printf("Address:%p Size:%lu Marked %u ", root->address, root->size, root->marked);
+    printf("Address:%p Size:%lu Marked %u \n", root->address, root->size, root->marked);
     in_order(root->right);
 }
 
@@ -28,7 +28,7 @@ void printTree(struct Node *root, int space) {
     printf("\n");
     for (int i = COUNT; i < space; i++)
         printf(" ");
-    printf("Address:%p Size:%lu Marked %u ", root->address, root->size, root->marked);
+    printf("Address:%p Size:%lu Marked %u \n", root->address, root->size, root->marked);
     printTree(root->left, space);
 }
 
