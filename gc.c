@@ -13,11 +13,15 @@ void gc_init() {
 }
 
 struct ref *gc_alloc(size_t size) {
-    void *obj = malloc(size);
-	gc.tree = avl_insert(gc.tree, obj, size);
+	void *obj = malloc(size);
+	if (!obj) {
+    		fprintf(stderr, "Allocation failed\n");
+    		exit(EXIT_FAILURE);
+	}
+    	gc.tree = avl_insert(gc.tree, obj, size);
 	ref_ins(gc.objs, obj);
 	printTree(gc.tree, 0);
-    return gc_ref(obj);
+   	return gc_ref(obj);
 }
 
 struct ref *gc_ref(void *ptr) {
@@ -58,7 +62,7 @@ int garbage_collect()
         }
 		printf("[Del] ptr:%p\n", ref->ptr);
 		printTree(gc.tree, 0);
-		avl_delete(gc.tree, ref->ptr);
+		gc.tree = avl_delete(gc.tree, ref->ptr);
 		printTree(gc.tree, 0);
 		free(ref->ptr);
 		ref = ref_del(ref);
