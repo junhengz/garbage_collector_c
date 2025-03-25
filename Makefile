@@ -8,7 +8,7 @@ CFLAGS = -Wall -Wextra -pedantic -std=c11
 TARGET = garbage_collector
 
 # Source files
-SRCS = avl_tree.c node.c gc.c main.c
+SRCS = avl_tree.c node.c gc.c main.c list.c
 
 # Object files
 OBJS = $(SRCS:.c=.o)
